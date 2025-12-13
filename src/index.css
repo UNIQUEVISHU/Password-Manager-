@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@layer components {
+  .mycontainer {
+    /* small devices: small padding; large devices: 50px horizontal padding */
+    @apply container px-4 sm:px-6 md:px-14 lg:px-[50px] py-8 mx-auto;
+  }
+}
