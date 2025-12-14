@@ -88,6 +88,17 @@ const Managager = () => {
 
       <div className="mycontainer my-9 p-2 min-h-[88.2vh]">
 
+        {/* HERO */}
+        <div className="w-full text-center mb-6">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-slate-800">
+            <span className="text-green-500">&lt;</span>
+            PassOp
+            <span className="text-green-500">/&gt;</span>
+          </h1>
+          <p className="text-green-700 mt-2 text-lg">Your own password manager</p>
+          <div className="mx-auto mt-4 h-0.5 w-24 bg-gradient-to-r from-green-400 via-green-300 to-transparent" />
+        </div>
+
         {/* FORM */}
         <div className="flex flex-col gap-6 items-center p-4">
           <input
