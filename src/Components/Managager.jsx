@@ -90,12 +90,12 @@ const Managager = () => {
 
         {/* HERO */}
         <div className="w-full text-center mb-6">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-slate-800">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-800">
             <span className="text-green-500">&lt;</span>
             PassOp
             <span className="text-green-500">/&gt;</span>
           </h1>
-          <p className="text-green-700 mt-2 text-lg">Your own password manager</p>
+          <p className="text-green-700 mt-2 text-base md:text-lg">Your own password manager</p>
           <div className="mx-auto mt-4 h-0.5 w-24 bg-gradient-to-r from-green-400 via-green-300 to-transparent" />
         </div>
 
@@ -139,7 +139,7 @@ const Managager = () => {
 
           <button
             onClick={savepassword}
-            className="bg-green-400 hover:bg-green-300 px-6 py-2 rounded-full flex gap-2 items-center"
+            className="bg-green-400 hover:bg-green-300 px-6 py-2 rounded-full flex gap-2 items-center w-full md:w-auto justify-center"
           >
             <lord-icon
               src="https://cdn.lordicon.com/jgnvfzqg.json"
@@ -155,74 +155,92 @@ const Managager = () => {
         {passwordArray.length === 0 && <div>No password to show</div>}
 
         {passwordArray.length !== 0 && (
-          <table className="table-auto w-full border-collapse border-spacing-0 rounded-md overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full table-fixed text-sm sm:text-base border-collapse rounded-md overflow-hidden">
+              <colgroup>
+                <col style={{ width: '40%' }} />
+                <col style={{ width: '20%' }} />
+                <col style={{ width: '20%' }} />
+                <col style={{ width: '20%' }} />
+              </colgroup>
             <thead className="bg-green-800 text-white">
               <tr>
-                <th className="py-2">Site</th>
-                <th className="py-2">Username</th>
-                <th className="py-2">Password</th>
-                <th className="py-2">Actions</th>
+                <th className="py-2 text-left pl-4">Site</th>
+                <th className="py-2 text-left">Username</th>
+                <th className="py-2 text-left">Password</th>
+                <th className="py-2 text-center">Actions</th>
               </tr>
             </thead>
 
             <tbody className="bg-green-100 [&>tr]:border-b [&>tr:last-child]:border-b-0">
               {passwordArray.map(item => (
                 <tr key={item.id}>
-                  <td className="text-center py-2 border border-white">
-                    <a href={item.site} target="_blank">{item.site}</a>
-                    <div onClick={() => copyText(item.site)} className="cursor-pointer">
-                      <lord-icon
-                        src="https://cdn.lordicon.com/iykgtsbt.json"
-                        trigger="hover"
-                        style={{ width: 25, height: 25 }}
-                      />
+                  <td className="text-left py-2 border border-white">
+                    <div className="flex items-center gap-2">
+                      <a href={item.site} target="_blank" rel="noopener noreferrer" className="truncate max-w-[160px]">{item.site}</a>
+                      <button onClick={() => copyText(item.site)} className="p-1" aria-label={'Copy site ' + item.site}>
+                        <lord-icon
+                          src="https://cdn.lordicon.com/iykgtsbt.json"
+                          trigger="hover"
+                          style={{ width: 22, height: 22 }}
+                        />
+                      </button>
                     </div>
                   </td>
 
-                  <td className="text-center py-2 border border-white">
-                    {item.username}
-                    <div onClick={() => copyText(item.username)} className="cursor-pointer">
-                      <lord-icon
-                        src="https://cdn.lordicon.com/iykgtsbt.json"
-                        trigger="hover"
-                        style={{ width: 25, height: 25 }}
-                      />
+                  <td className="text-left py-2 border border-white">
+                    <div className="flex items-center gap-2">
+                      <div className="truncate max-w-[120px] sm:max-w-[160px]">{item.username}</div>
+                      <button onClick={() => copyText(item.username)} className="p-1" aria-label={'Copy username ' + item.username}>
+                        <lord-icon
+                          src="https://cdn.lordicon.com/iykgtsbt.json"
+                          trigger="hover"
+                          style={{ width: 22, height: 22 }}
+                        />
+                      </button>
                     </div>
                   </td>
 
-                  <td className="text-center py-2 border border-white">
-                    {item.password}
-                    <div onClick={() => copyText(item.password)} className="cursor-pointer">
-                      <lord-icon
-                        src="https://cdn.lordicon.com/iykgtsbt.json"
-                        trigger="hover"
-                        style={{ width: 25, height: 25 }}
-                      />
+                  <td className="text-left py-2 border border-white">
+                    <div className="flex items-center gap-2">
+                      <div className="truncate max-w-[120px] sm:max-w-[160px]">{item.password}</div>
+                      <button onClick={() => copyText(item.password)} className="p-1" aria-label={'Copy password for ' + item.site}>
+                        <lord-icon
+                          src="https://cdn.lordicon.com/iykgtsbt.json"
+                          trigger="hover"
+                          style={{ width: 22, height: 22 }}
+                        />
+                      </button>
                     </div>
                   </td>
 
-                  <td className="text-center py-1 border border-white">
-                    <button onClick={() => editpassword(item.id)} className="mx-1 cursor-pointer p-1 rounded hover:bg-green-600 hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-300" aria-label={'Edit ' + item.site}>
-                      <lord-icon
-                        src="https://cdn.lordicon.com/gwlusjdu.json"
-                        trigger="hover"
-                        style={{ width: 25, height: 25 }}
-                      />
-                    </button>
+                  <td className="text-center py-1 border border-white whitespace-nowrap">
+                    <div className="inline-flex items-center justify-center gap-1">
+                      <button onClick={(e) => { editpassword(item.id); e.currentTarget.blur(); }} className="cursor-pointer p-2 rounded-full hover:bg-green-600 hover:text-white transition transform hover:scale-110 active:scale-95 active:translate-y-0.5 active:bg-transparent focus:bg-transparent focus:text-current focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2" aria-label={'Edit ' + item.site}>
+                        <lord-icon
+                          src="https://cdn.lordicon.com/gwlusjdu.json"
+                          trigger="hover"
+                          style={{ width: 22, height: 22 }}
+                        />
+                      </button>
 
-                    <button onClick={() => deletepassword(item.id)} className="mx-1 cursor-pointer p-1 rounded hover:bg-red-600 hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-300" aria-label={'Delete ' + item.site}>
-                      <lord-icon
-                        src="https://cdn.lordicon.com/skkahier.json"
-                        trigger="hover"
-                        style={{ width: 25, height: 25 }}
-                      />
-                    </button>
+                      <button onClick={(e) => { deletepassword(item.id); e.currentTarget.blur(); }} className="cursor-pointer p-2 rounded-full hover:bg-red-600 hover:text-white transition transform hover:scale-110 active:scale-95 active:translate-y-0.5 active:bg-transparent focus:bg-transparent focus:text-current focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2" aria-label={'Delete ' + item.site}>
+                        <lord-icon
+                          src="https://cdn.lordicon.com/skkahier.json"
+                          trigger="hover"
+                          style={{ width: 22, height: 22 }}
+                        />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
             </tbody>
-          </table>
+            </table>
+          </div>
         )}
+
+
       </div>
     </>
   )

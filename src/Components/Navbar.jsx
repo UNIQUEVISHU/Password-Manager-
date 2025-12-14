@@ -18,10 +18,10 @@ const Navbar = () => {
           <a className='hover:font-bold' href="/">Contact</a>
         </li>
       </ul> */}
-      <button className='text-white rounded-full bg-green-700 cursor-pointer flex items-center gap-2 px-3 py-1 ring-white ring-1'>
-        <img className='invert w-6' src="/icon/github.svg" alt="github logo" />
+      <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className='text-white rounded-full bg-green-700 cursor-pointer flex items-center gap-2 px-2 py-1 ring-white ring-1 hover:bg-green-600 transition'>
+        <img className='invert w-5' src="/icon/github.svg" alt="github logo" />
         <span className='font-bold text-sm'>Github</span>
-      </button>
+      </a>
 
         </div>
     </nav>
